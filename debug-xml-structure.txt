@@ -1,0 +1,36 @@
+[XML PARSER] Checking dedicated_cfg.txt...
+  Server Name: PARSE_ERROR
+  Server Port: PARSE_ERROR
+  RPC Port: PARSE_ERROR
+  Master Login: PARSE_ERROR
+  ✓ XML Parser appears to be working
+[JSON PARSER] Checking database.config.json...
+  DB Host: 
+  DB Name: 
+  DB User: 
+  ✓ JSON Parser appears to be working
+[JSON PARSER] Checking server.config.json...
+  RPC IP: 
+  RPC Port: 
+  ✓ JSON Parser appears to be working
+[2025-08-12 09:58:25] Console handler ready. Type !help for commands.
+[2025-08-12 09:58:25] Starting Trackmania server...
+[2025-08-12 09:58:25] Starting EvoSC monitor...
+Starting Trackmania date=2025-06-17_18_00 git=127516-d719879c7d9 GameVersion=3.3.0...
+Configuration file : dedicated_cfg.txt
+Loading system configuration...
+...system configuration loaded
+Loading dedicated server configuration...
+...Dedicated server configuration loaded
+Listening for xml-rpc commands on port 5000.
+WARNING:
+  * The xml-rpc connection is open to any ip, 
+  * but the Admin / SuperAdmin password hasn't been changed! 
+  * Anybody can remotely control the server.
+Match settings file : MatchSettings\tm_timeattack_online.txt
+Loading match settings...
+...Match settings loaded
+Server not started: no ServerName specified.
+URL: uplay://launch/5595/0/#join=172.18.0.6::2350@Trackmania
+Server not running, exiting.
+Exiting...

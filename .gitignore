@@ -1,0 +1,31 @@
+# Logs
+logs/
+*.log
+
+# Server files (downloaded during installation)
+server/
+EvoSC/
+
+# Backups
+backups/
+
+# Temporary files
+tmp/
+*.tmp
+
+# Pterodactyl egg exports (create these manually)
+*.json
+!.github/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker
+.dockerignore
