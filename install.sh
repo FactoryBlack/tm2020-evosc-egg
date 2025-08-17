@@ -26,6 +26,11 @@ cd EvoSC
 composer install --no-dev --optimize-autoloader
 cd ..
 
+# Download start.sh from this repository
+echo "Downloading startup script..."
+curl -sSL "https://raw.githubusercontent.com/FactoryBlack/tm2020-evosc-egg/main/start.sh" -o start.sh
+chmod +x start.sh
+
 # Create default configuration files with Pelican template variables
 echo "Creating configuration files..."
 
