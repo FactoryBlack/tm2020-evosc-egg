@@ -190,10 +190,22 @@ print_status "Starting Trackmania server..."
 # Start console input handler in background (keeping shared console)
 handle_console_input &
 
-# Start EvoSC (original working approach - foreground execution)
+# Find the correct EvoSC entry point
 cd EvoSC
 print_success "EvoSC controller started"
 print_status "Type !help for available commands"
 
-# Execute EvoSC in foreground (original working method)
-exec php evosc
+# Check for different possible EvoSC entry points
+if [ -f "evosc" ]; then
+    exec php evosc
+elif [ -f "evosc.php" ]; then
+    exec php evosc.php
+elif [ -f "index.php" ]; then
+    exec php index.php
+elif [ -f "core/bootstrap.php" ]; then
+    exec php core/bootstrap.php
+else
+    print_error "Could not find EvoSC entry point"
+    ls -la
+    exit 1
+fi

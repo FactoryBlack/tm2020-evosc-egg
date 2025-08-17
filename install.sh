@@ -3,27 +3,59 @@
 # Set working directory
 cd /mnt/server
 
-# Install required packages
-apt update
-apt install -y curl unzip git composer php php-cli php-json php-mbstring php-curl php-xml php-mysqli php-pdo php-pdo-mysql php-zip
+# Install required packages for Alpine Linux including missing PHP extensions
+apk update
+apk add --no-cache \
+    curl \
+    unzip \
+    git \
+    composer \
+    php82 \
+    php82-cli \
+    php82-json \
+    php82-mbstring \
+    php82-curl \
+    php82-xml \
+    php82-mysqli \
+    php82-pdo \
+    php82-pdo_mysql \
+    php82-zip \
+    php82-simplexml \
+    php82-tokenizer \
+    php82-gd \
+    php82-opcache
+
+# Create PHP symlink
+ln -sf /usr/bin/php82 /usr/bin/php
 
 # Create necessary directories
 mkdir -p logs backups tmp
 
 # Download Trackmania 2020 Server (original working URL)
 echo "Downloading Trackmania 2020 Server..."
-curl -sSL -o TrackmaniaServer.zip "http://files.v04.maniaplanet.com/server/TrackmaniaServer_Latest.zip"
-unzip -q -o TrackmaniaServer.zip -d server
-chmod +x server/TrackmaniaServer
-rm TrackmaniaServer.zip
+if [ ! -f "server/TrackmaniaServer" ]; then
+    curl -sSL -o TrackmaniaServer.zip "http://files.v04.maniaplanet.com/server/TrackmaniaServer_Latest.zip"
+    unzip -q -o TrackmaniaServer.zip -d server
+    chmod +x server/TrackmaniaServer
+    rm TrackmaniaServer.zip
+    echo "Trackmania server downloaded"
+else
+    echo "Trackmania server already exists"
+fi
 
-# Download EvoSC (original working repository)
+# Download EvoSC (original working repository) - handle existing directory
 echo "Downloading EvoSC..."
+if [ -d "EvoSC" ]; then
+    echo "EvoSC directory exists, removing..."
+    rm -rf EvoSC
+fi
+
 git clone --depth 1 --branch master https://github.com/EvoTM/EvoSC.git
 
 # Install EvoSC dependencies
 cd EvoSC
-composer install --no-dev --optimize-autoloader
+echo "Installing EvoSC dependencies..."
+composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 cd ..
 
 # Download start.sh from this repository
