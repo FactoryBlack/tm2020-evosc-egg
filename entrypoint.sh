@@ -26,6 +26,16 @@ if [[ -f ".pteroignore" ]]; then
     rm -f .pteroignore
 fi
 
+# Make install script executable if it exists
+if [ -f "./install.sh" ]; then
+    chmod +x ./install.sh
+fi
+
+# Make start script executable if it exists
+if [ -f "./start.sh" ]; then
+    chmod +x ./start.sh
+fi
+
 # Convert all of the "{{VARIABLE}}" parts of the command into the expected shell
 # variable format of "${VARIABLE}" before evaluating the string and automatically
 # replacing the values.
@@ -36,5 +46,4 @@ PARSED=$(echo "${STARTUP}" | sed -e 's/{{/${/g' -e 's/}}/}/g' | envsubst)
 printf "\033[1m\033[33mcontainer@pterodactyl~ \033[0m%s\n" "$PARSED"
 
 # Execute the startup command
-exec env ${PARSED}
-</merged_code>
+exec ${PARSED}

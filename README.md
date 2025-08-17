@@ -14,14 +14,23 @@ Production-ready Trackmania 2020 server with EvoSC controller for Pterodactyl/Pe
 
 ## Quick Setup
 
-### 1. Create Pterodactyl Egg
+### 1. Use Pre-built Docker Image
+
+The Docker image is automatically built from this repository:
+
+\`\`\`bash
+# Use the GitHub Container Registry image
+ghcr.io/factoryblack/tm2020-evosc-egg:latest
+\`\`\`
+
+### 2. Create Pterodactyl Egg
 
 In your Pterodactyl admin panel, create a new egg with these settings:
 
 **Basic Settings:**
 - Name: `Trackmania 2020 + EvoSC`
 - Author: `your-email@example.com`
-- Docker Image: `dogre/ptero:prod` (or your custom image)
+- Docker Image: `ghcr.io/factoryblack/tm2020-evosc-egg:latest`
 - Startup Command: `./start.sh`
 
 **File Configuration:**
@@ -73,7 +82,7 @@ In your Pterodactyl admin panel, create a new egg with these settings:
 
 **Stop Command:** `!stop`
 
-### 2. Environment Variables
+### 3. Environment Variables
 
 Add these variables to your egg:
 
@@ -96,9 +105,9 @@ Add these variables to your egg:
 | `FORCE_IP_ADDRESS` | Force specific IP | `` | ❌ |
 | `DEFAULT_MATCHSETTINGS` | Default match settings | `tracklist.txt` | ✅ |
 
-### 3. Installation Script
+### 4. Installation Script
 
-Copy the contents of `install.sh` into the egg's installation script field.
+Copy the contents of `install.sh` from this repository into the egg's installation script field.
 
 ## Console Commands
 
@@ -122,6 +131,17 @@ The server provides a unified console interface:
 ├── logs/                 # Server logs
 ├── backups/              # Automatic backups
 └── start.sh              # Startup script
+\`\`\`
+
+## Building Your Own Image
+
+If you want to build your own Docker image:
+
+\`\`\`bash
+git clone https://github.com/FactoryBlack/tm2020-evosc-egg.git
+cd tm2020-evosc-egg
+docker build -t your-registry/tm2020-evosc:latest .
+docker push your-registry/tm2020-evosc:latest
 \`\`\`
 
 ## Troubleshooting
@@ -154,6 +174,7 @@ For issues and support:
 1. Check server logs first
 2. Verify configuration matches documentation
 3. Test with minimal configuration
+4. Open an issue on GitHub: https://github.com/FactoryBlack/tm2020-evosc-egg/issues
 
 ## License
 
